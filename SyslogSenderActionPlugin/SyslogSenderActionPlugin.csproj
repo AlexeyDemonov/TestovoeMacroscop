@@ -52,6 +52,8 @@
   <ItemGroup>
     <Compile Include="Enums\Facility.cs" />
     <Compile Include="Enums\Severity.cs" />
+    <Compile Include="EventProcessor\SyslogEvent.cs" />
+    <Compile Include="EventProcessor\SyslogEventProcessor.cs" />
     <Compile Include="PluginDefinition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RawEventParser.cs" />

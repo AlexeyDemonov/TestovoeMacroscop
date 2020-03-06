@@ -14,6 +14,7 @@ namespace SyslogSenderActionPlugin
         public void Initialize(IPluginHost host)
         {
             host.RegisterExternalAction(typeof(SyslogAction));
+            host.RegisterEventProcessor(typeof(EventProcessor.SyslogEventProcessor));
         }
     }
 }
