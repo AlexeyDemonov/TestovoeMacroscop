@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
-using System.Net.Sockets;
 
 namespace SyslogSenderActionPlugin.EventProcessor
 {
@@ -15,7 +13,7 @@ namespace SyslogSenderActionPlugin.EventProcessor
 
         public void StartListening(int port)
         {
-            if(_client != null)
+            if (_client != null)
             {
                 StopListening();
             }
@@ -53,7 +51,7 @@ namespace SyslogSenderActionPlugin.EventProcessor
 
         void KeepListening(Task<bool> task)
         {
-            if(task != null && !task.IsFaulted && task.Result == true)
+            if (task != null && !task.IsFaulted && task.Result == true)
                 AcceptSyslogAsync().ContinueWith(KeepListening);
         }
     }
