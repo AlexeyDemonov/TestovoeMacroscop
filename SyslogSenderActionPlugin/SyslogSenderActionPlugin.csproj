@@ -54,6 +54,7 @@
     <Compile Include="Enums\Severity.cs" />
     <Compile Include="PluginDefinition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RawEventParser.cs" />
     <Compile Include="SyslogAction.cs" />
     <Compile Include="SyslogMessage.cs" />
     <Compile Include="SyslogSender.cs" />

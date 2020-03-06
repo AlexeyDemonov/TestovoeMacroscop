@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SyslogSenderActionPlugin
 {
-    class SyslogSender
+    class SyslogSender : IDisposable
     {
         UdpClient _udpClient;
         SyslogSerializer _serializer;
@@ -19,9 +15,8 @@ namespace SyslogSenderActionPlugin
             _serializer = new SyslogSerializer();
         }
 
-        public void Send(SyslogMessage message)
+        public void Send(byte[] data)
         {
-            byte[] data = _serializer.Serialize(message);
             _udpClient.Send(data, data.Length);
         }
 
@@ -34,7 +29,7 @@ namespace SyslogSenderActionPlugin
 
         ~SyslogSender()
         {
-            if(!_disposed)
+            if (!_disposed)
                 Dispose();
         }
     }
