@@ -8,9 +8,6 @@ using System.Threading.Tasks;
 using Alarus;
 using Alarus.Action_;
 using Alarus.RealTimeFrameProviding;
-using SyslogNet.Client;
-using SyslogNet.Client.Serialization;
-using SyslogNet.Client.Transport;
 
 namespace SyslogSenderActionPlugin
 {
@@ -37,10 +34,8 @@ namespace SyslogSenderActionPlugin
             var message = new SyslogMessage(time, Facility.UserLevelMessages, Severity.Informational,
                 Environment.MachineName, "Macroscop", comment);
 
-            var serializer = new SyslogRfc3164MessageSerializer();
-            var syslogSender = new SyslogUdpSender("localhost", 514);
-
-            syslogSender.Send(message, serializer);
+            var sender = new SyslogSender("localhost", 514);
+            sender.Send(message);
         }
 
         string GetEventName(RawEvent rawEvent)
