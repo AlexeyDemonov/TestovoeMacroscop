@@ -30,13 +30,13 @@ namespace SyslogSenderActionPlugin.EventProcessor
 
         async Task<bool> AcceptSyslogAsync()
         {
+            string message = null;
+
             try
             {
                 var task = await _client.ReceiveAsync();
                 byte[] data = task.Buffer;
-                var message = Encoding.ASCII.GetString(data);
-                MessageArrived?.Invoke(message);
-                return true;
+                message = Encoding.ASCII.GetString(data);
             }
             catch (ObjectDisposedException)//Client closed
             {
@@ -47,6 +47,9 @@ namespace SyslogSenderActionPlugin.EventProcessor
                 //Rethrow
                 throw;
             }
+
+            MessageArrived?.Invoke(message);
+            return true;
         }
 
         void KeepListening(Task<bool> task)
